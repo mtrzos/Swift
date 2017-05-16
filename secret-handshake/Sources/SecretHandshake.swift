@@ -1,19 +1,36 @@
 //Solution goes in Sources
 struct SecretHandshake {
-    var commands : [String]
+    var commands : [String] = []
     
-    init(_ valueInit : Int) {
-        switch valueInit {
+    init(_ inputCode : Int) {
+        var code = inputCode
+        var count = 0
+        
+        while code > 0 {
+            
+            if((code % 2) == 1){
+                addSignalToCommands(count)
+            }
+            
+            code = code / 2
+            count += 1
+        }
+    }
+    
+    mutating func addSignalToCommands( _ count : Int) -> Void {
+        switch count {
+        case 0:
+            commands.append("wink")
         case 1:
-            commands = ["wink"]
+            commands.append("double blink")
         case 2:
-            commands = ["double blink"]
+            commands.append("close your eyes")
+        case 3:
+            commands.append("jump")
         case 4:
-            commands = ["close your eyes"]
-        case 8:
-            commands = ["jump"]
+            commands.reverse()
         default:
-            commands = ["jump"]
+            commands = []
         }
     }
 }
